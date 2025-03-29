@@ -5,13 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class ChatListController extends GetxController {
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    getTrainerDetails();
-    super.onInit();
-  }
-
   TextEditingController searchController = TextEditingController();
 
   RxBool loader = false.obs;
@@ -149,21 +142,6 @@ class ChatListController extends GetxController {
     int count = querySnapshot.docs.length;
 
     return count;
-  }
-
-  getTrainerDetails() async {
-    loader.value = true;
-
-    roomIds.clear();
-    newMsgCount.clear();
-
-    newMsgCount = List.generate(roomIds.length, (index) => 0);
-
-    await getFirestoreData();
-
-    loader.value = false;
-
-    update(["chatList"]);
   }
 
   String timeAgo(DateTime d) {
